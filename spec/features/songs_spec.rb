@@ -3,7 +3,7 @@ describe 'songs', type: :feature do
     Artist.destroy_all
     Song.destroy_all
     @artist = Artist.create!(name: 'Daft Punk')
-    @song = @artist.songs.create!(title: 'The Grid')
+    @song = @artist.songs.create!(title: 'The Grid', artist_id:1)
   end
 
   it "index page lists songs in 'Artist Name - Song Title' format" do
