@@ -1,12 +1,21 @@
 class ArtistsController < ApplicationController
+  before_action :set_artist, only: [:show, :edit, :update, :delete]
+  
   def index
+    @artists = Artist.all
   end
 
   def show
+    @songs = @artist.songs
+    @song_count = @songs.count
+    flash[:artist_name] = @artist.name
+    
   end
 
   def new
+    
     @artist = Artist.new
+    
   end
 
   def create
@@ -15,12 +24,12 @@ class ArtistsController < ApplicationController
     if @artist.save
       redirect_to @artist
     else
-      render :new
+      redirect_to new_artist_path
     end
   end
 
   def edit
-    @artist = Artist.find(params[:id])
+
   end
 
   def update
@@ -31,7 +40,7 @@ class ArtistsController < ApplicationController
     if @artist.save
       redirect_to @artist
     else
-      render :edit
+      redirect_to edit_artist_path
     end
   end
 
@@ -47,4 +56,9 @@ class ArtistsController < ApplicationController
   def artist_params
     params.require(:artist).permit(:name)
   end
+
+  def set_artist
+    @artist = Artist.find(params[:id])
+  end
+
 end

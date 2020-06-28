@@ -1,5 +1,7 @@
 <h1>Create a Song</h1>
 
+
+
 <%= form_for @song  do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
@@ -7,7 +9,7 @@
 
   <%= fields_for :artist do |artist_f| %>
     <%= artist_f.label :artist %>
-    <%= artist_f.text_field :name %>
+    <%= artist_f.text_field :name, value: params[:artist_name] %>
     <br />
   <% end %>
 
